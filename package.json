@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/Abduler21/Flight-Tracker#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "dotenv": "^14.3.2",
+    "express": "^4.17.2",
+    "mysql": "^2.18.1",
+    "sequelize": "^6.15.0"
   }
 }
