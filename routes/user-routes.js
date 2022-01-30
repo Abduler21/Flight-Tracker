@@ -14,5 +14,11 @@ router.get("/", async (req, res) => {
     console.log(`Could not get all users ${err}`);
   }
 });
-
+router.post("/", async (req, res) => {
+  console.log("route hit");
+  return res.status(200).json({
+    status: "success",
+    message: "signed up",
+  });
+});
 module.exports = router;
