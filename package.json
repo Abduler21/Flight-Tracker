@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Abduler21/Flight-Tracker#readme",
   "dependencies": {
+    "@duffel/api": "^1.7.7",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.1",
     "connect-session-sequelize": "^7.1.2",
