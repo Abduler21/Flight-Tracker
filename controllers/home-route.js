@@ -49,8 +49,9 @@ router.get("/homepage", (req, res) => {
     )
 
     .then(function (response) {
-      res.render("homepage");
-      console.log(response.data);
+      // render this with the data obj
+      console.log(response.data.offers);
+      res.render("homepage", response.data.offers);
     });
 
   // other logic...
