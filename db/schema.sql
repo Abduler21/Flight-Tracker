@@ -1,3 +1,3 @@
-DROP DATABASE IF EXISTS flight_trakerdb;
+DROP DATABASE IF EXISTS flights_db;
 
-CREATE DATABASE flight_trakerdb;
+CREATE DATABASE flights_db;

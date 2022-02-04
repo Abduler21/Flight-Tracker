@@ -13,6 +13,7 @@ node_modules/
 # misc
 .DS_Store
 .env
+.env_old
 
 npm-debug.log*
 yarn-debug.log*
