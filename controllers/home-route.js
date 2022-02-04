@@ -9,7 +9,10 @@ const config = {
   },
 };
 // get all posts for homepage
-router.get("/", (req, res) => {});
+router.get("/", (req, res) => {
+  res.render("login");
+});
+
 router.get("/signup", (req, res) => {
   res.render("signup");
 });
