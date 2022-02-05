@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
 const { Post, User, Comment, Vote } = require("../models");
-const axios = require("axios");
+
 const config = {
   headers: {
     "Duffel-Version": "beta",
@@ -10,7 +10,13 @@ const config = {
 };
 // get all posts for homepage
 router.get("/", (req, res) => {
-  res.render("login");
+  if (!req.session.loggedIn) {
+    res.redirect("login");
+    return;
+  }
+  res.render("landing", {
+    loggedIn: req.session.loggedIn
+  });
 });
 
 router.get("/signup", (req, res) => {
@@ -19,7 +25,10 @@ router.get("/signup", (req, res) => {
 
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {
-    res.redirect("/homepage");
+    res.render("landing", {
+      loggedIn: req.session.loggedIn
+    });
+
     return;
   }
 
