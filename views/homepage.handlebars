@@ -1,7 +1,78 @@
 <h1>Homepage</h1>
+
+<section class="w-100">
+  <div>
+    <h2>
+      Flight Search
+    </h2>
+  </div>
+  <div class="row">
+    <form id="flight-search">
+      <div class="col-lg-4">
+        <label for="From-label">From</label>
+        {{! <input type="text" name="from" id="from" class="form-control" /> }}
+        <select id="inputState from-select" class="form-control">
+          <option>LHR(London Heathrow)</option>
+          <option>CDG</option>
+          <option>MEL</option>
+          <option>LAX</option>
+          <option>BCN</option>
+          <option>SYD</option>
+          <option>AKL</option>
+          <option>DEL</option>
+          <option>SIN</option>
+          <option>HKG</option>
+          <option>JFK</option>
+        </select>
+      </div>
+      <div class="col-lg-3">
+        <label for="To">To</label>
+        {{! <input type="text" name="To" id="To" class="form-control" /> }}
+        <select id="inputState to" class="form-control">
+          <option>LHR(London Heathrow)</option>
+          <option>CDG</option>
+          <option>MEL</option>
+          <option>LAX</option>
+          <option>BCN</option>
+          <option>SYD</option>
+          <option>AKL</option>
+          <option>DEL</option>
+          <option>SIN</option>
+          <option>HKG</option>
+          <option>JFK</option>
+        </select>
+      </div>
+      <div class="col-lg-3">
+        <label for="date">Date</label>
+        <input type="Date" name="Date" id="Date" />
+      </div>
+      <div class="col-lg-3">
+        <label for="Passengers">Passengers</label>
+        {{! <input type="text" name="To" id="To" class="form-control" /> }}
+        <select id="inputState passenger" class="form-control">
+          <option value="1">1 Adult</option>
+          <option value="2">2 Adult</option>
+          <option value="3">3 Adult</option>
+        </select>
+      </div>
+      <div class="col-lg-3">
+        <label for="Class">Class</label>
+        {{! <input type="text" name="To" id="To" class="form-control" /> }}
+        <select id="inputState class-type" class="form-control">
+          <option>Business</option>
+          <option>First Class</option>
+          <option>Economy</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary" id="search-btn">
+        Search Flights
+      </button>
+    </form>
+  </div>
+</section>
 <ol class="post-list">
   {{#each offers as |offer|}}
-
     <li>{{offer.owner.name}}</li>
   {{/each}}
 </ol>
+<script src="/javascript/duffel_API.js"></script>
