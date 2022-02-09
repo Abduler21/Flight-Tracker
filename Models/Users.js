@@ -1,6 +1,7 @@
 const { Model, DataTypes } = require("sequelize");
 const bcrypt = require("bcrypt");
 const sequelize = require("../config/connection");
+const Flights = require("./Flights");
 
 // create our User model
 class User extends Model {
@@ -13,7 +14,7 @@ class User extends Model {
 // create fields/columns for User model
 User.init(
   {
-    id: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
@@ -62,5 +63,11 @@ User.init(
     modelName: "user",
   }
 );
-
+User.hasMany(Flights, {
+  as: "flight_tickets",
+  onDelete: "cascade",
+});
+Flights.belongsTo(User, {
+  foreignKey: "userId",
+});
 module.exports = User;
