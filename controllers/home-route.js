@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
 const { Post, User, Comment, Vote } = require("../models");
+const axios = require("axios");
 
 const config = {
   headers: {
@@ -14,8 +15,8 @@ router.get("/", (req, res) => {
     res.redirect("login");
     return;
   }
-  res.render("landing", {
-    loggedIn: req.session.loggedIn
+  res.render("homepage", {
+    loggedIn: req.session.loggedIn,
   });
 });
 
@@ -25,8 +26,8 @@ router.get("/signup", (req, res) => {
 
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {
-    res.render("landing", {
-      loggedIn: req.session.loggedIn
+    res.render("homepage", {
+      loggedIn: req.session.loggedIn,
     });
 
     return;
@@ -37,35 +38,7 @@ router.get("/login", (req, res) => {
 
 router.get("/homepage", (req, res) => {
   console.log(req.session);
-  axios
-    .post(
-      "https://api.duffel.com/air/offer_requests",
-      {
-        data: {
-          cabin_class: "economy",
-          slices: [
-            {
-              departure_date: "2022-04-04",
-              destination: "JFK",
-              origin: "ADA",
-            },
-          ],
-          passengers: [
-            {
-              type: "child",
-            },
-          ],
-        },
-      },
-      config
-    )
-
-    .then(function (response) {
-      console.log(response.data.data.offers);
-      const offers = response.data.data.offers;
-      res.render("homepage", offers);
-    });
-
+  res.render("homepage");
   // other logic...
 });
 
