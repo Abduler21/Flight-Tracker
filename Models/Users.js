@@ -63,11 +63,12 @@ User.init(
     modelName: "user",
   }
 );
-User.hasMany(Flights, {
-  as: "flight_tickets",
-  onDelete: "cascade",
-});
-Flights.belongsTo(User, {
-  foreignKey: "userId",
-});
+// User.hasMany(Model.Flights, {
+//   as: "flight_tickets",
+//   onDelete: "cascade",
+//   foreignKey: "userId",
+// });
+// Flights.belongsTo(User, {
+//   foreignKey: "userId",
+// });
 module.exports = User;

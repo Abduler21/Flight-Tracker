@@ -40,6 +40,11 @@ Flights.init(
     origin_city: { type: DataTypes.STRING },
 
     destination_city: { type: DataTypes.STRING },
+
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {
     sequelize,
@@ -49,8 +54,5 @@ Flights.init(
     modelName: "flights",
   }
 );
-// Flights.belongsTo(User, {
-//   foreignKey: "userId",
-// });
 
 module.exports = Flights;
