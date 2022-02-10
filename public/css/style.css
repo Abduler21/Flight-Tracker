@@ -1,6 +1,33 @@
 .flighttrac{
-    color:red;
+    color:burlywood;
+}
+.loginout{
+    color: white;
 }
 body{
     background-image: url("http://www.jetexe.com/wp-content/uploads/2016/11/flight-takeoff-hd-20.jpeg");
+    /* background-size: cover;
+    background-position: 100%; */
+}
+@media screen and (max-width:565px ){
+    
+}
+form{
+    display: flex;
+    flex-direction: column;
+
+   
+
+    background-color:none;
+    
+    font-size: 16px;
+    color: wheat;
+    line-height: 1.7;
+    
+    
+    
+    
+}
+.row{
+width: 75%;
 }
