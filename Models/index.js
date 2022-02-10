@@ -4,5 +4,6 @@ const express = require('express')
 const app = express()
 
 const User = require("./Users");
+const Flights = require("./Flights");
 
-module.exports = { User };
+module.exports = { User, Flights };
