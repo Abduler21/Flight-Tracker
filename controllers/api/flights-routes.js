@@ -1,49 +1,152 @@
 const router = require("express").Router();
-// import { Duffel } from "@duffel/api";
-const { Duffel } = require("@duffel/api");
+const axios = require("axios");
+const Flights = require("../../Models/Flights");
 
-router.post("/lookup", async (req, res) => {
-  // try {
-  const duffel = new Duffel({
-    token: "duffel_live_DtDz8y-Guv18G8A8BMD9vt6AxnUZu5Fk6z4Aecy1Lb4",
-  });
-  const offerRequest = await duffel.offerRequests.create({
-    slices: [
+// route to look up flights from duffel API
+router.post("/lookup", (req, res) => {
+  console.log(req.body);
+  const config = {
+    headers: {
+      "Duffel-Version": "beta",
+      Authorization: `Bearer duffel_live_DtDz8y-Guv18G8A8BMD9vt6AxnUZu5Fk6z4Aecy1Lb4`,
+    },
+  };
+  axios
+    .post(
+      "https://api.duffel.com/air/offer_requests",
       {
-        origin: "JFK",
-        destination: "LAX",
-        departure_date: "2022-08-01T19:47:55.004Z",
+        data: {
+          cabin_class: req.body.cabin,
+          slices: [
+            {
+              departure_date: req.body.departure_date,
+              destination: req.body.destination,
+              origin: req.body.origin,
+            },
+          ],
+          passengers: [
+            {
+              type: req.body.type,
+            },
+          ],
+        },
       },
-    ],
-    passengers: [{ type: "adult" }],
-    cabin_class: null,
-  });
+      config
+    )
+    .then(function (response) {
+      const offers = response.data.data.offers;
 
-  // If no flights found error handler
-  if (!offerRequest) {
-    console.log(
-      `==================Request could not be made==================`
-    );
-    return res.status(400).json({
-      status: "failed",
-      message: "Error making the offer request",
-    });
-  }
+      if (!response) {
+        return res.status(401).json({
+          status: "failed",
+          message: "There are not flights for this ticket",
+        });
+      }
 
-  const offers = await duffel.offers.list(offerRequest.data.id);
-  if (!offers) {
-    console.log(
-      `==================No tickets could be found==================`
-    );
-    return res.status(400).json({
-      status: "failed",
-      message: "Could not find any flights",
+      return res.status(200).json({
+        status: "success",
+        data: {
+          offers,
+        },
+      });
     });
-  }
-  console.log("flights are active" + offers);
-  // } catch (err) {
-  //   console.log(`There was an error connecting to Duffel: ${err}`);
-  // }
 });
 
+// Save a flight route
+router.post("/", (req, res) => {
+  Flights.create({
+    totalAmount: req.body.totalAmount,
+    passenger_id: req.body.passenger_id,
+    cabin_class: req.body.cabin_class,
+    originName: req.body.originName,
+    timeZone: req.body.timeZone,
+    operating_carrier: req.body.operating_carrier,
+    destinationName: req.body.destinationName,
+    departing_at: req.body.departing_at,
+    arriving_at: req.body.arriving_at,
+    duration: req.body.duration,
+    origin_city: req.body.origin_city,
+    destination_city: req.body.destination_city,
+    user_id: req.body.user_id,
+  })
+    .then((flightData) => {
+      return res.status(200).json({
+        status: "success",
+        data: {
+          flightData,
+        },
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json(err);
+    });
+});
+
+// get all flight tickets of user
+router.get("/:id", (req, res) => {
+  Flights.findAll({
+    where: {
+      user_id: req.params.id,
+    },
+  })
+    .then((flightData) => {
+      if (!flightData) {
+        return res.status(400).json({
+          status: "failed",
+          message: "could not find any tickets with this user" + req.params.id,
+        });
+      }
+
+      return res.status(200).json({
+        status: "success",
+        data: {
+          flightData,
+        },
+      });
+    })
+    .catch((err) => {
+      return res.status(500).json(err);
+    });
+});
+// update flight route
+router.put("/:id", (req, res) => {
+  Flights.update(req.body, {
+    individualHooks: true,
+    where: {
+      passenger_id: req.params.id,
+    },
+  })
+    .then((flightData) => {
+      if (!flightData) {
+        res.status(404).json({ message: "no user found with this id" });
+        return;
+      }
+      return res.json(flightData);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json(err);
+    });
+});
+
+// delete flight route
+router.delete("/:id", (req, res) => {
+  Flights.destroy({
+    where: {
+      passenger_id: req.params.id,
+    },
+  })
+    .then((flightData) => {
+      if (!flightData) {
+        res.status(404).json({ message: "No flights found with this id" });
+        return;
+      }
+      return res.json(flightData);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json(err);
+    });
+});
 module.exports = router;

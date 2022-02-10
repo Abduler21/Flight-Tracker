@@ -63,6 +63,10 @@ router.post("/login", (req, res) => {
     }
 
     const validPassword = dbUserData.checkPassword(req.body.password);
+    console.log(
+      "The id of user is ===========================",
+      dbUserData.userId
+    );
 
     if (!validPassword) {
       res.status(400).json({ message: "Incorrect password!" });
@@ -71,7 +75,7 @@ router.post("/login", (req, res) => {
 
     req.session.save(() => {
       // declare session variables
-      req.session.user_id = dbUserData.id;
+      req.session.user_id = dbUserData.userId;
       req.session.username = dbUserData.username;
       req.session.loggedIn = true;
 
