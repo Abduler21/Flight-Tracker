@@ -110,6 +110,43 @@ router.get("/:id", (req, res) => {
     });
 });
 // update flight route
+router.put("/:id", (req, res) => {
+  Flights.update(req.body, {
+    individualHooks: true,
+    where: {
+      passenger_id: req.params.id,
+    },
+  })
+    .then((flightData) => {
+      if (!flightData) {
+        res.status(404).json({ message: "no user found with this id" });
+        return;
+      }
+      return res.json(flightData);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json(err);
+    });
+});
 
 // delete flight route
+router.delete("/:id", (req, res) => {
+  Flights.destroy({
+    where: {
+      passenger_id: req.params.id,
+    },
+  })
+    .then((flightData) => {
+      if (!flightData) {
+        res.status(404).json({ message: "No flights found with this id" });
+        return;
+      }
+      return res.json(flightData);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json(err);
+    });
+});
 module.exports = router;
