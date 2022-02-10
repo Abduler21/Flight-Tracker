@@ -79,7 +79,34 @@ router.post("/", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).json(err);
+      return res.status(500).json(err);
+    });
+});
+
+// get all flight tickets of user
+router.get("/:id", (req, res) => {
+  Flights.findAll({
+    where: {
+      user_id: req.params.id,
+    },
+  })
+    .then((flightData) => {
+      if (!flightData) {
+        return res.status(400).json({
+          status: "failed",
+          message: "could not find any tickets with this user" + req.params.id,
+        });
+      }
+
+      return res.status(200).json({
+        status: "success",
+        data: {
+          flightData,
+        },
+      });
+    })
+    .catch((err) => {
+      return res.status(500).json(err);
     });
 });
 // update flight route
