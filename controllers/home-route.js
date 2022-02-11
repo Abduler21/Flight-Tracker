@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const { default: axios } = require("axios");
 const sequelize = require("../config/connection");
 const { Post, User, Comment, Vote } = require("../models");
 const axios = require("axios");

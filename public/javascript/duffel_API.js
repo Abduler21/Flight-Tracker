@@ -8,7 +8,7 @@ $(document).ready(function () {
     const dateInput = $("#Date").val();
     const passengerInput = $("#passenger").find(":selected").text();
     const classInput = $("#class-type").find(":selected").text();
-
+    fetch ( )
     console.log(
       `The data the user is sending is: ${fromInput} To: ${toInput} date: ${dateInput} passenger: ${passengerInput} ticketType: ${classInput}`
     );
