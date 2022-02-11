@@ -4,7 +4,7 @@ const Flights = require("../../Models/Flights");
 
 // route to look up flights from duffel API
 router.post("/lookup", (req, res) => {
-  console.log(req.body);
+
   const config = {
     headers: {
       "Duffel-Version": "beta",
@@ -24,11 +24,7 @@ router.post("/lookup", (req, res) => {
               origin: req.body.origin,
             },
           ],
-          passengers: [
-            {
-              type: req.body.type,
-            },
-          ],
+          passengers: req.body.passengers,
         },
       },
       config
