@@ -1,5 +1,7 @@
-.flighttrac{
-    color:burlywood;
+.search-flight-section {
+  width: 100%;
+  height: 600px;
+  background-image: url("http://www.jetexe.com/wp-content/uploads/2016/11/flight-takeoff-hd-20.jpeg");
 }
 .loginout{
     color: white;
@@ -16,19 +18,32 @@ body{
 form{
     display: flex;
     flex-direction: column;
-
-   
-
-    background-color:none;
-    
-    font-size: 16px;
-    color: wheat;
-    line-height: 1.7;
-    
-    
-    
-    
 }
-.row{
-width: 75%;
+.navbar {
+  background-color: rgba(2, 2, 2, 0) !important;
+}
+.navbar .navbar-brand {
+  font-size: 25px;
+  color: white;
+  transition: all 0.3s ease !important;
+}
+.navbar-brand:hover {
+  color: rgb(207, 207, 207) !important;
+}
+.nav-link {
+  color: white !important;
+  font-size: 20px;
+  transition: all 0.3s ease !important;
+}
+.nav-link:hover {
+  color: rgb(207, 207, 207) !important;
+}
+
+#flight-search {
+  width: 100%;
+  margin-top: 10%;
+  display: inline-flex !important;
+}
+
+@media screen and (max-width: 565px) {
 }
