@@ -1,47 +1,66 @@
-function setPassengers (input) {
-  let passengers = []; //[{type: "adult"}, {type: "adult"}, {type: "adult"}]
-
-  // Code that builds passenger array based on input vvvv
-  // Split form input "3 Adult" ["3", "Adult"]
-  // Loop on how many is in the first item IE: "3"
-  // Add to passengers each time it loops with type "adult"
-
-  return passengers; // return changed passenger array
-}
-
-async function searchFlight(event) {
-    event.preventDefault();
-    const passengers = setPassengers($("#passenger").find(":selected").text());
-    const origin= $("#from-select").find(":selected").text();
-    const destination = $("#to").find(":selected").text();
-    const departure_date = $("#Date").val();
-    const cabin = $("#class-type").find(":selected").text();
+$(document).ready(function () {
+  const getFlights = (from, to, date, passenger, classType) => {
+    let flightOffer = {
+      cabin: classType,
+      departure_date: date,
+      destination: to,
+      origin: from,
+      type: passenger,
+    };
 
     console.log(
-      `The data the user is sending is: ${origin} To: ${destination} date: ${departure_date} passenger: ${passengers} ticketType: ${cabin}`
+      `The options to user chose is ===== ${JSON.stringify(flightOffer)}`
     );
 
-    //API CALL
-    const response = await fetch("/api/flights/lookup", {
-      method: "post",
-      body: JSON.stringify({
-        departure_date,
-        cabin,
-        destination,
-        origin,
-        passengers,
-      }),
-      headers: { "Content-Type": "application/json" },
-    });
+    $.post("/api/flights/lookup", flightOffer, function () {
+      console.log("Called route to duffel API");
+    })
+      .then((data) => {
+        console.log("The data from duffel is", data);
+        const flights = $("#flight-list");
+        for( let i=0; i<data.data.offers.offers.length; i++ ){
+          let li = $("<li>");
+          li.text(data.data.offers.offers[i].owner.name)
+          flights.append(li)
+  
+        } 
+        
 
-    if (response.ok) {
-      console.log(`done ${response}`);
-    } else {
-      alert(response.statusText);
-    }
-};
+        return data;
+      })
+      .catch((err) => {
+        console.log(JSON.stringify(err));
+      });
+  };
 
+  const searchBtn = $("#search-btn");
 
-document
-  .querySelector("#search-btn")
-  .addEventListener("click", searchFlight);
+  $("#search-btn").on("click", (event) => {
+    event.preventDefault();
+    const fromInput = $("#from-select").find(":selected").text();
+    const toInput = $("#to").find(":selected").text();
+    const dateInput = $("#Date").val();
+    const passengerInput = $("#passenger")
+      .find(":selected")
+      .text()
+      .toLowerCase();
+    const classInput = $("#class-type").find(":selected").text();
+
+    // let newDate = moment(dateInput, "MM-DD-YYYY");
+    // newDate.toISOString();
+    // console.log(newDate);
+
+    // console.log(
+    //   `The data the user iss sending is: ${fromInput} To: ${toInput} date: ${dateInput} passenger: ${passengerInput} ticketType: ${classInput}`
+    // );
+
+    // get flights from API
+    const offers = getFlights(
+      fromInput,
+      toInput,
+      dateInput,
+      passengerInput,
+      classInput
+    );
+  });
+});

@@ -1,9 +1,21 @@
 const router = require("express").Router();
 const axios = require("axios");
 const Flights = require("../../Models/Flights");
+// const moment = require("moment");
 
 // route to look up flights from duffel API
 router.post("/lookup", (req, res) => {
+  console.log(req.body);
+
+  let passNum = req.body.type.split(" ")[0];
+
+  const passengers = [];
+  for (let i = 0; i < passNum; i++) {
+    const numberOfPassenger = {
+      type: req.body.type.split(" ")[1],
+    };
+    passengers.push(numberOfPassenger);
+  }
 
   const config = {
     headers: {
@@ -24,13 +36,14 @@ router.post("/lookup", (req, res) => {
               origin: req.body.origin,
             },
           ],
-          passengers: req.body.passengers,
+          passengers,
         },
       },
       config
     )
     .then(function (response) {
-      const offers = response.data.data.offers;
+      const offers = response.data.data;
+      //console.log("The offers are ========", offers);
 
       if (!response) {
         return res.status(401).json({
@@ -38,6 +51,11 @@ router.post("/lookup", (req, res) => {
           message: "There are not flights for this ticket",
         });
       }
+      //  res.render("flights", {
+      //   data: {
+      //     offers
+      //   }
+      // });
 
       return res.status(200).json({
         status: "success",
@@ -45,6 +63,9 @@ router.post("/lookup", (req, res) => {
           offers,
         },
       });
+    })
+    .catch((err) => {
+      console.log(err.response);
     });
 });
 

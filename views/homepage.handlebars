@@ -1,18 +1,45 @@
-<h1>Homepage</h1>
-
-<section class="w-100">
-  <div>
-    <h2>
-      Flight Search
-    </h2>
-  </div>
-  <div class="row">
+<section class="search-flight-section">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+        aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="/homepage">Flight Tracker</a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {{#if loggedIn}}
+          <li class="nav-item">
+            <a href="/homepage" class="nav-link">Homepage</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/myflights">My Flights</a>
+          </li>
+          <li class="nav-item">
+            <a id="logout" class="nav-link">Logout</a>
+          </li>
+          {{else}}
+          <li class="nav-item">
+            <a href="/homepage" class="nav-link">Homepage</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/myflights">My Flights</a>
+          </li>
+          <li class="nav-item">
+            <a href="/login" class="login-btn nav-link">login</a>
+          </li>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="row container-fluid">
     <form id="flight-search">
-      <div class="col-lg-4">
+      <div class="col-lg-2 col-sm-12">
         <label for="From-label">From</label>
         {{! <input type="text" name="from" id="from" class="form-control" /> }}
         <select id="from-select" class="form-control">
-          <option>LHR(London Heathrow)</option>
+          <option>LHR</option>
           <option>CDG</option>
           <option>MEL</option>
           <option>LAX</option>
@@ -25,11 +52,11 @@
           <option>JFK</option>
         </select>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg-2 col-sm-12">
         <label for="To">To</label>
         {{! <input type="text" name="To" id="To" class="form-control" /> }}
         <select id="to" class="form-control">
-          <option>LHR(London Heathrow)</option>
+          <option>LHR</option>
           <option>CDG</option>
           <option>MEL</option>
           <option>LAX</option>
@@ -42,11 +69,11 @@
           <option>JFK</option>
         </select>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg-2 col-sm-12">
         <label for="date">Date</label>
         <input type="Date" name="Date" id="Date" />
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg-2 col-sm-12">
         <label for="Passengers">Passengers</label>
         {{! <input type="text" name="To" id="To" class="form-control" /> }}
         <select id="passenger" class="form-control">
@@ -55,24 +82,26 @@
           <option value="3">3 Adult</option>
         </select>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg-2 col-sm-12">
         <label for="Class">Class</label>
         {{! <input type="text" name="To" id="To" class="form-control" /> }}
         <select id="class-type" class="form-control">
           <option>Business</option>
-          <option>First Class</option>
           <option>Economy</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary" id="search-btn">
+      <button type="submit" class="btn btn-primary mt-4" id="search-btn">
         Search Flights
       </button>
     </form>
   </div>
+
 </section>
-<ol class="post-list">
-  {{#each offers as |offer|}}
-    <li>{{offer.owner.name}}</li>
-  {{/each}}
+<ol id="flight-list" class="post-list">
+
+
+
+
 </ol>
+
 <script src="/javascript/duffel_API.js"></script>

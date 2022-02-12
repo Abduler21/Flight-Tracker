@@ -35,4 +35,8 @@ router.get("/homepage", (req, res) => {
   // other logic...
 });
 
+router.get("/myflights", (req, res) => {
+  res.render("myflights");
+});
+
 module.exports = router;
