@@ -51,6 +51,11 @@ router.post("/lookup", (req, res) => {
           message: "There are not flights for this ticket",
         });
       }
+      //  res.render("flights", {
+      //   data: {
+      //     offers
+      //   }
+      // });
 
       return res.status(200).json({
         status: "success",

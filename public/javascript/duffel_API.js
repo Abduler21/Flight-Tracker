@@ -17,6 +17,15 @@ $(document).ready(function () {
     })
       .then((data) => {
         console.log("The data from duffel is", data);
+        const flights = $("#flight-list");
+        for( let i=0; i<data.data.offers.offers.length; i++ ){
+          let li = $("<li>");
+          li.text(data.data.offers.offers[i].owner.name)
+          flights.append(li)
+  
+        } 
+        
+
         return data;
       })
       .catch((err) => {
