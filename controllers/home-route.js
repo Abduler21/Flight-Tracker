@@ -3,7 +3,6 @@ const { default: axios } = require("axios");
 const sequelize = require("../config/connection");
 const { Post, User, Comment, Vote } = require("../models");
 
-
 // get all posts for homepage
 router.get("/", (req, res) => {
   if (!req.session.loggedIn) {
@@ -34,6 +33,10 @@ router.get("/login", (req, res) => {
 router.get("/homepage", (req, res) => {
   res.render("homepage");
   // other logic...
+});
+
+router.get("/myflights", (req, res) => {
+  res.render("myflights");
 });
 
 module.exports = router;
