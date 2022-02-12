@@ -3,46 +3,52 @@
   margin-bottom: 2em;
   /* background-image: url("http://www.jetexe.com/wp-content/uploads/2016/11/flight-takeoff-hd-20.jpeg"); */
 }
-.loginout{
-    color: white;
+.loginout {
+  color: white;
 }
-body{
-    /* background-image: url("http://www.jetexe.com/wp-content/uploads/2016/11/flight-takeoff-hd-20.jpeg"); */
-    /* background-size: cover;
+body {
+  /* background-image: url("http://www.jetexe.com/wp-content/uploads/2016/11/flight-takeoff-hd-20.jpeg"); */
+  /* background-size: cover;
     background-position: 100%; */
 }
-@media screen and (max-width:565px ){
-    
-    
+@media screen and (max-width: 565px) {
 }
-form{
-    display: flex;
-    flex-direction: column;
+form {
+  display: flex;
+  flex-direction: column;
 }
 .navbar {
   background-color: rgba(2, 2, 2, 0) !important;
 }
 .navbar .navbar-brand {
   font-size: 25px;
-  color: white;
+  color: rgb(0, 0, 0);
   transition: all 0.3s ease !important;
 }
 .navbar-brand:hover {
-  color: rgb(207, 207, 207) !important;
+  color: rgb(37, 35, 35) !important;
 }
 .nav-link {
-  color: white !important;
+  color: rgb(0, 0, 0) !important;
   font-size: 20px;
   transition: all 0.3s ease !important;
 }
 .nav-link:hover {
-  color: rgb(207, 207, 207) !important;
+  color: rgb(0, 0, 0) !important;
 }
 
 #flight-search {
   width: 100%;
   margin-top: 10%;
   display: inline-flex !important;
+}
+
+/* LOGIN PAGE CSS */
+#login-section {
+  min-height: 100vh;
+}
+.login-form {
+  max-width: 700px;
 }
 
 @media screen and (max-width: 565px) {
