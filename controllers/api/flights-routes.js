@@ -116,10 +116,12 @@ router.post("/", (req, res) => {
 });
 
 // get all flight tickets of user
-router.get("/:id", (req, res) => {
+router.get("/", (req, res) => {
+  const userId = req.session.user_id; // current logged in userId
+
   Flights.findAll({
     where: {
-      user_id: req.params.id,
+      user_id: userId,
     },
   })
     .then((flightData) => {
