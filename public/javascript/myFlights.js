@@ -41,6 +41,11 @@ $(document).ready(function () {
           total_amount.text(data.data.flightData[i].total_amount);
           total_amount.attr("id", "total_amount");
 
+          let deleteButton = $("<button>");
+          deleteButton.text("Delete Flight");
+          deleteButton.addClass("btn btn-danger");
+          deleteButton.attr("id", "delete-btn");
+
           // STEP 6. APPEND ALL THE HTML THAT HAS THE DATA FROM API INTO THE li
           li.append(duration);
           li.append(cabin_class);
@@ -48,6 +53,7 @@ $(document).ready(function () {
           li.append(operating_carrier);
           li.append(origin_city);
           li.append(total_amount);
+          li.append(deleteButton);
 
           // step 7. push all the li into the div(ul) to display in html page
           myFlightDiv.append(li);
@@ -58,6 +64,22 @@ $(document).ready(function () {
       });
   };
 
+  // FUNCTION TO DELETE FLIGHT
+  $(document).on("click", "#delete-btn", function () {
+    //   we need passenger_id to delete a ticket
+    // so we need to get the passenger id
+    const passengerId = $(this).parent().attr("id");
+
+    // after we get passenger_id we then call the delete route in our API
+    $.ajax({
+      url: "/api/flights/" + passengerId,
+      type: "DELETE",
+      success: function () {
+        console.log("Successfully deleted flight ticket!");
+        window.location.href = "/myflights";
+      },
+    });
+  });
   // call function to get flights
   getMyTickets();
 });

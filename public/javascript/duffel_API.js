@@ -118,7 +118,10 @@ $(document).ready(function () {
     $.post("/api/flights/", flightInfo, function () {
       console.log("Saved flight into database!");
     })
-      .then(() => console.log("Saving into MYSQL is successful!!!!!"))
+      .then(() => {
+        console.log("Saving into MYSQL is successful!!!!!");
+        alert("Your flight ticket has been booked!");
+      })
       .catch((err) => {
         console.log("There is an error saving flight", err);
       });
