@@ -19,25 +19,25 @@ form{
     display: flex;
     flex-direction: column;
 }
-.navbar {
-  background-color: rgba(2, 2, 2, 0) !important;
+/* .navbar {
+  background-color: ;
 }
 .navbar .navbar-brand {
   font-size: 25px;
-  color: white;
+  color: black;
   transition: all 0.3s ease !important;
 }
 .navbar-brand:hover {
   color: rgb(207, 207, 207) !important;
 }
 .nav-link {
-  color: white !important;
+  color: black !important;
   font-size: 20px;
   transition: all 0.3s ease !important;
 }
 .nav-link:hover {
-  color: rgb(207, 207, 207) !important;
-}
+  color: rgba(2, 2, 2, 0) !important;
+} */
 
 #flight-search {
   width: 100%;
