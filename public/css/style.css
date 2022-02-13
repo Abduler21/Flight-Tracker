@@ -28,7 +28,7 @@ form{
   transition: all 0.3s ease !important;
 }
 .navbar-brand:hover {
-  color: rgb(207, 207, 207) !important;
+  color: rgba(2, 2, 2, 0) !important;
 }
 .nav-link {
   color: black !important;
