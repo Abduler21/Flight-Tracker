@@ -6,6 +6,10 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+          <!-- Navbar content -->
+        </nav>
+
         <a class="navbar-brand" href="/homepage">Flight Tracker</a>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           {{#if loggedIn}}
@@ -30,8 +34,9 @@
           </li>
           {{/if}}
         </ul>
-      </div>
-    </div>
+  </nav>
+  </div>
+  </div>
   </nav>
   <div class="row container-fluid">
     <form id="flight-search">
@@ -98,12 +103,25 @@
 
 </section>
 <div class="container">
-<ol id="flight-list" class="post-list">
+  {{!-- <ol id="flight-list" class="post-list"></ol> --}}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Airline</th>
+        <th scope="col">Origin</th>
+        <th scope="col">Destination</th>
+        <th scope="col">price</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody id="flight-list">
+     
+    </tbody>
+  </table>
 </div>
 
 
-
-
-</ol>
 
 <script src="/javascript/duffel_API.js"></script>
