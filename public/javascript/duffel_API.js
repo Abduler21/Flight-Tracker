@@ -22,6 +22,7 @@ $(document).ready(function () {
         const flights = $("#flight-list");
         for (let i = 0; i < data.data.offers.offers.length; i++) {
           let li = $("<li>"); // this li will hold each flight info
+          li.attr("id", data.data.offers.offers[i].id);
 
           // FLIGHT DURATION
           let flightDuration = $("<p>"); // step 1. make variable for html
@@ -100,7 +101,26 @@ $(document).ready(function () {
     const price = $(this).siblings("#cost-amount").text();
     const duration = $(this).siblings("#flight-duration").text();
     const origin = $(this).siblings("#origin-name").text();
+    const destination = $(this).siblings("#destination-name").text();
     const carrier = $(this).siblings("#carrier-name").text();
-    console.log(price, duration, origin, carrier);
+    const passengerId = $(this).parent().attr("id");
+
+    const flightInfo = {
+      totalAmount: price.split("$")[1],
+      passenger_id: passengerId,
+      cabin_class: cabinClass,
+      origin_city: origin,
+      operating_carrier: carrier,
+      destination_city: destination,
+      duration: duration,
+    };
+    // calling route to save flight
+    $.post("/api/flights/", flightInfo, function () {
+      console.log("Saved flight into database!");
+    })
+      .then(() => console.log("Saving into MYSQL is successful!!!!!"))
+      .catch((err) => {
+        console.log("There is an error saving flight", err);
+      });
   });
 });

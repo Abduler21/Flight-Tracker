@@ -71,33 +71,48 @@ router.post("/lookup", (req, res) => {
 
 // Save a flight route
 router.post("/", (req, res) => {
-  Flights.create({
-    totalAmount: req.body.totalAmount,
-    passenger_id: req.body.passenger_id,
-    cabin_class: req.body.cabin_class,
-    originName: req.body.originName,
-    timeZone: req.body.timeZone,
-    operating_carrier: req.body.operating_carrier,
-    destinationName: req.body.destinationName,
-    departing_at: req.body.departing_at,
-    arriving_at: req.body.arriving_at,
-    duration: req.body.duration,
-    origin_city: req.body.origin_city,
-    destination_city: req.body.destination_city,
-    user_id: req.body.user_id,
-  })
-    .then((flightData) => {
-      return res.status(200).json({
-        status: "success",
-        data: {
-          flightData,
-        },
-      });
+  console.log("The req.body is ==", req.body);
+  console.log("The current user id ==", req.session.user_id);
+
+  // 1. check if ticket is already saved
+  Flights.findOne({
+    where: {
+      passenger_id: req.body.passenger_id,
+    },
+  }).then((ticket) => {
+    if (ticket) {
+      console.log("You already have a ticket with id");
+      return;
+    }
+    // if not saved then save the new ticket
+    Flights.create({
+      totalAmount: req.body.totalAmount,
+      passenger_id: req.body.passenger_id,
+      cabin_class: req.body.cabin_class,
+      originName: req.body.originName,
+      timeZone: req.body.timeZone,
+      operating_carrier: req.body.operating_carrier,
+      destinationName: req.body.destinationName,
+      departing_at: req.body.departing_at,
+      arriving_at: req.body.arriving_at,
+      duration: req.body.duration,
+      origin_city: req.body.origin_city,
+      destination_city: req.body.destination_city,
+      user_id: req.session.user_id,
     })
-    .catch((err) => {
-      console.log(err);
-      return res.status(500).json(err);
-    });
+      .then((flightData) => {
+        return res.status(200).json({
+          status: "success",
+          data: {
+            flightData,
+          },
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).json(err);
+      });
+  });
 });
 
 // get all flight tickets of user
