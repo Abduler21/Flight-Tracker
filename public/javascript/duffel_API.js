@@ -47,11 +47,13 @@ $(document).ready(function () {
           console.log("The data from duffel is", data);
           const flights = $("#flight-list");
           for (let i = 0; i < data.data.offers.offers.length; i++) {
-            let li = $("<li>"); // this li will hold each flight info
-            li.attr("id", data.data.offers.offers[i].id);
-
+            let tr = $("<tr>"); // this tr will hold each flight info
+            tr.attr("id", data.data.offers.offers[i].id);
+            let thnum = $("<th>");
+            thnum.attr("scope", "row");
+            thnum.text(i+1);
             // FLIGHT DURATION
-            let flightDuration = $("<p>"); // step 1. make variable for html
+            let flightDuration = $("<td>"); // step 1. make variable for html
             flightDuration.text(
               // step 2. make text of html variable the data you want from API
               data.data.offers.offers[i].slices[0].duration.split("T")[1]
@@ -59,45 +61,49 @@ $(document).ready(function () {
             flightDuration.attr("id", "flight-duration");
 
             // ORIGIN NAME
-            let originName = $("<p>");
+            let originName = $("<td>");
             originName.text(
               data.data.offers.offers[i].slices[0].origin.city_name
             );
             originName.attr("id", "origin-name");
 
             // DESTINATION NAME
-            let destinationName = $("<p>");
+            let destinationName = $("<td>");
             destinationName.text(
               data.data.offers.offers[i].slices[0].destination.city_name
             );
             destinationName.attr("id", "destination-name");
 
             // CARRIER NAME
-            let CarrierName = $("<p>"); // hold name of carrier(ex: turkish airlines)
+            let CarrierName = $("<td>"); // hold name of carrier(ex: turkish airlines)
             CarrierName.text(data.data.offers.offers[i].owner.name);
             CarrierName.attr("id", "carrier-name");
 
             // COST
-            let cost = $("<p>");
+            let cost = $("<td>");
             cost.text("$" + data.data.offers.offers[i].total_amount);
             cost.attr("id", "cost-amount");
 
             // BOOK FLIGHT BUTTON
+            let buttonTd = $("<td>");
             let bookButton = $("<button>");
             bookButton.text("Book Flight");
             bookButton.addClass("btn btn-success");
             bookButton.attr("id", "book-btn");
+            buttonTd.append(bookButton);
 
-            // step 3. put all the data inside the li
-            li.append(flightDuration);
-            li.append(CarrierName);
-            li.append(originName);
-            li.append(destinationName);
-            li.append(cost);
-            li.append(bookButton);
+            // step 3. put all the data inside the tr
+            tr.append(thnum);
+            tr.append(flightDuration);
+            tr.append(CarrierName);
+            tr.append(originName);
+            tr.append(destinationName);
+            tr.append(cost);
+            tr.append(buttonTd);
+            
 
-            // step 4. push the li into the flight-list ol in html
-            flights.append(li);
+            // step 4. push the tr into the flight-list ol in html
+            flights.append(tr);
           }
           return data;
         })
