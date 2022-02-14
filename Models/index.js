@@ -3,7 +3,7 @@ const axios = require("axios");
 const express = require("express");
 const app = express();
 
-const User = require("./users");
-const Flights = require("./flights");
+const User = require("./Users");
+const Flights = require("./Flights");
 
 module.exports = { User, Flights };
