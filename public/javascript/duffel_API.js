@@ -51,7 +51,7 @@ $(document).ready(function () {
             tr.attr("id", data.data.offers.offers[i].id);
             let thnum = $("<th>");
             thnum.attr("scope", "row");
-            thnum.text(i+1);
+            thnum.text(i + 1);
             // FLIGHT DURATION
             let flightDuration = $("<td>"); // step 1. make variable for html
             flightDuration.text(
@@ -100,7 +100,6 @@ $(document).ready(function () {
             tr.append(destinationName);
             tr.append(cost);
             tr.append(buttonTd);
-            
 
             // step 4. push the tr into the flight-list ol in html
             flights.append(tr);
@@ -131,12 +130,12 @@ $(document).ready(function () {
   // FUNCTION TO SAVE A FLIGHT
   $(document).on("click", "#book-btn", function () {
     console.log("Button pressed!");
-    const price = $(this).siblings("#cost-amount").text();
-    const duration = $(this).siblings("#flight-duration").text();
-    const origin = $(this).siblings("#origin-name").text();
-    const destination = $(this).siblings("#destination-name").text();
-    const carrier = $(this).siblings("#carrier-name").text();
-    const passengerId = $(this).parent().attr("id");
+    const price = $(this).parent().siblings("#cost-amount").html();
+    const duration = $(this).parent().siblings("#flight-duration").html();
+    const origin = $(this).parent().siblings("#origin-name").html();
+    const destination = $(this).parent().siblings("#destination-name").html();
+    const carrier = $(this).parent().siblings("#carrier-name").html();
+    const passengerId = $(this).parent().parent().attr("id");
 
     const flightInfo = {
       totalAmount: price.split("$")[1],
@@ -147,6 +146,8 @@ $(document).ready(function () {
       destination_city: destination,
       duration: duration,
     };
+
+    console.log(flightInfo);
     // calling route to save flight
     $.post("/api/flights/", flightInfo, function () {
       console.log("Saved flight into database!");
