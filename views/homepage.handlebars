@@ -1,14 +1,17 @@
 <section class="search-flight-section">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+      <img src="/public/images/airplane-departure-flat-design-long-shadow-glyph-vector-28807699.webp" alt="" width="30" height="24">
+    </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
         aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        {{!-- <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
           <!-- Navbar content -->
-        </nav>
+        </nav> --}}
 
         <a class="navbar-brand" href="/homepage">Flight Tracker</a>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -38,9 +41,9 @@
   </div>
   </div>
   </nav>
-  <div class="row container-fluid">
-    <form id="flight-search">
-      <div class="col-lg-2 col-sm-12">
+  <div class=" container-fluid">
+    <form id="flight-search" class="row align-items-center">
+      <div class="col">
         <label for="From-label">From</label>
         {{! <input type="text" name="from" id="from" class="form-control" /> }}
         <select id="from-select" class="form-control">
@@ -57,7 +60,7 @@
           <option>JFK</option>
         </select>
       </div>
-      <div class="col-lg-2 col-sm-12">
+      <div class="col">
         <label for="To">To</label>
         {{! <input type="text" name="To" id="To" class="form-control" /> }}
         <select id="to" class="form-control">
@@ -74,11 +77,11 @@
           <option>JFK</option>
         </select>
       </div>
-      <div class="col-lg-2 col-sm-12">
+      <div class="col">
         <label for="date">Date</label>
         <input type="Date" name="Date" id="Date" />
       </div>
-      <div class="col-lg-2 col-sm-12">
+      <div class="col">
         <label for="Passengers">Passengers</label>
         {{! <input type="text" name="To" id="To" class="form-control" /> }}
         <select id="passenger" class="form-control">
@@ -87,7 +90,7 @@
           <option value="3">3 Adult</option>
         </select>
       </div>
-      <div class="col-lg-2 col-sm-12">
+      <div class="col">
         <label for="Class">Class</label>
         {{! <input type="text" name="To" id="To" class="form-control" /> }}
         <select id="class-type" class="form-control">
@@ -95,7 +98,7 @@
           <option>Economy</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary mt-4" id="search-btn">
+      <button type="submit" class="btn btn-success mt-4" id="search-btn">
         Search Flights
       </button>
     </form>

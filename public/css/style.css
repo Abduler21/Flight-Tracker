@@ -1,15 +1,15 @@
 .search-flight-section {
   width: 100%;
   margin-bottom: 2em;
-  /* background-image: url("http://www.jetexe.com/wp-content/uploads/2016/11/flight-takeoff-hd-20.jpeg"); */
+  background-image: url("https://th.bing.com/th/id/OIP.s9L3kS_sRuvcWq-pwW7dzwHaFj?w=242&h=181&c=7&r=0&o=5&pid=1.7");
 }
 .loginout{
     color: white;
 }
 body{
-    /* background-image: url("http://www.jetexe.com/wp-content/uploads/2016/11/flight-takeoff-hd-20.jpeg"); */
-    /* background-size: cover;
-    background-position: 100%; */
+    background-image: url("https://th.bing.com/th/id/OIP.s9L3kS_sRuvcWq-pwW7dzwHaFj?w=242&h=181&c=7&r=0&o=5&pid=1.7");
+    background-size: cover;
+    background-position: 100%;
 }
 @media screen and (max-width:565px ){
     
@@ -21,23 +21,23 @@ form{
 }
 /* .navbar {
   background-color: ;
-}
+} */
 .navbar .navbar-brand {
   font-size: 25px;
-  color: black;
+  color: white;
   transition: all 0.3s ease !important;
 }
 .navbar-brand:hover {
   color: rgba(2, 2, 2, 0) !important;
 }
 .nav-link {
-  color: black !important;
+  color: white !important;
   font-size: 20px;
   transition: all 0.3s ease !important;
 }
 .nav-link:hover {
   color: rgba(2, 2, 2, 0) !important;
-} */
+}
 
 #flight-search {
   width: 100%;
