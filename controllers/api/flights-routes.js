@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const axios = require("axios");
-const Flights = require("../../Models/Flights");
+const Flights = require("../../models/Flights");
 // const moment = require("moment");
 
 // route to look up flights from duffel API
